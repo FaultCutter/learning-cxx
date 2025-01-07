@@ -12,7 +12,7 @@ enum ColorEnum : unsigned char {
     COLOR_YELLOW,
     COLOR_BLUE,
 };
-
+enum week{Mon, Tue, Wed, Thu, Fri, Sat, Sun};
 // 有作用域枚举型是 C++ 引入的类型安全枚举。
 // 其内部标识符需要带前缀引用，如 `Color::Red`。
 // 作用域枚举型可以避免命名空间污染，并提供类型安全保证。
@@ -37,10 +37,13 @@ ColorEnum convert_by_pun(Color c) {
 
     TypePun pun;
     // TODO: 补全类型双关转换
-
+    pun.c = c;
     return pun.e;
 }
 
+// C风格类型转换可能导致不安全
+//static_cast 是 C++ 中的类型转换操作符，是比较接近C风格的类型转换(编译器可识别报错)
+//https://www.cnblogs.com/jerry19880126/archive/2012/08/14/2638192.html
 int main(int argc, char **argv) {
     ASSERT(convert_by_pun(Color::Red) == COLOR_RED, "Type punning conversion");
     ASSERT(convert_by_pun(Color::Green) == COLOR_GREEN, "Type punning conversion");
